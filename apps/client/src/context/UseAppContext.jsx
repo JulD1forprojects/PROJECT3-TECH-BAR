@@ -16,7 +16,7 @@ export function UseAppContextProvider({ children }) {
   // headers for axios
   const headers = {
     withCredentials: true,
-  }
+  };
 
   //! login function
   async function logIn(email, password) {
@@ -24,19 +24,22 @@ export function UseAppContextProvider({ children }) {
     setLoading(true);
 
     try {
-      // ! make api call to backend
-      const { data } = await axios.post("/api/user/login", {
-        email,
-        password,
-      },
-      {
-        headers: headers
-      });
+      // make api call to backend
+      const { data } = await axios.post(
+        "/api/user/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: headers,
+        }
+      );
       console.log(data);
 
       // set user to user state
       setUser(data.user);
-      toast.success(`Welcome back ${data.user.name}!`)
+      toast.success(`Welcome back ${data.user.name}!`);
       // loading false
       setLoading(false);
 
@@ -67,8 +70,7 @@ export function UseAppContextProvider({ children }) {
       // setUser(data.user); //berwyn: I think should redirect to login page after signing up
       setLoading(false);
 
-      toast.success(data.message)
-      
+      toast.success(data.message);
 
       return data;
     } catch (err) {
@@ -88,7 +90,7 @@ export function UseAppContextProvider({ children }) {
     try {
       // make api call
       const { data } = await axios.get("/api/user/logout", {
-        headers: headers
+        headers: headers,
       });
 
       // set user state to empty
@@ -153,21 +155,22 @@ export function UseAppContextProvider({ children }) {
     try {
       const dataCat = await axios.get("/api/category");
       // console.log("cate", dataCat)
-      const categories = dataCat.data.categories.map(cat => {
+      const categories = dataCat.data.categories.map((cat) => {
         return cat._id;
-      })
+      });
       // console.log(categories)
 
       const { data } = await axios.get(`/api/product`);
       // console.log(data.products);
-      
-      const featuredProducts = categories.map(cat => {
-        const found = data.products.find(product => product.category._id === cat);
-        return found
-      })
+
+      const featuredProducts = categories.map((cat) => {
+        const found = data.products.find(
+          (product) => product.category._id === cat
+        );
+        return found;
+      });
       // console.log(featuredProducts);
       setFeaturedProducts(featuredProducts);
-
     } catch (error) {
       console.log(error);
     }
@@ -183,26 +186,26 @@ export function UseAppContextProvider({ children }) {
     // })
 
     // ! geting all products from api
-    
+
     // ! filering  only one product from each category
     // if (data.length >= 0) {
-      // const unique = data.products.filter((element) => {
-        // if (element.category) {
-        //   const isDuplicate = uniqueIds.includes(element.category._id);
+    // const unique = data.products.filter((element) => {
+    // if (element.category) {
+    //   const isDuplicate = uniqueIds.includes(element.category._id);
 
-        //   if (!isDuplicate) {
-        //     uniqueIds.push(element.category._id);
+    //   if (!isDuplicate) {
+    //     uniqueIds.push(element.category._id);
 
-        //     return true;
-        //   }
+    //     return true;
+    //   }
 
-        //   return false;
-        // }
-      // });
+    //   return false;
+    // }
+    // });
 
-      // ! set unique products to featured products state
-      
-      // setFeaturedProducts(unique);
+    // ! set unique products to featured products state
+
+    // setFeaturedProducts(unique);
     // }
   }
 
@@ -268,7 +271,7 @@ export function UseAppContextProvider({ children }) {
 
   useEffect(() => {
     //loading true
-    
+
     setLoading(true);
 
     const unsubscribe = async () => {
@@ -278,19 +281,18 @@ export function UseAppContextProvider({ children }) {
         // verify token , check f user is logged in
 
         const { data } = await axios.get("/api/user/refresh", {
-          headers: headers
+          headers: headers,
         });
-        console.log(data)
+        console.log(data);
         // set user to state
         if (data.refresh === false) {
           setLoading(false);
-          return
+          return;
         }
         setUser(data.user);
-        
+
         // loading false
         setLoading(false);
-
       } catch (err) {
         console.log(err);
         setLoading(false);
@@ -316,7 +318,6 @@ export function UseAppContextProvider({ children }) {
     // };
 
     unsubscribe();
-
   }, []);
 
   useEffect(() => {
@@ -344,7 +345,7 @@ export function UseAppContextProvider({ children }) {
         cleancart,
         categories,
         featuredproducts,
-        setUser
+        setUser,
       }}
     >
       {children}
