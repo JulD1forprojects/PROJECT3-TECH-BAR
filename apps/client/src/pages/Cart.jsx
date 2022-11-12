@@ -168,6 +168,7 @@ const Cart = ({ user }) => {
                             <div className="total-value final-value" id="basket-total">130.00</div>
                         </div> */}
             <div className="summary-checkout">
+<<<<<<< HEAD
               <button
                 className="checkout-cta"
                 style={{
@@ -175,6 +176,12 @@ const Cart = ({ user }) => {
                 }}
                 onClick={gotocheckout}
               >
+=======
+              <button className="checkout-cta" style={{
+                  background: "#04AA6D",
+                }}
+                onClick={gotocheckout}>
+>>>>>>> cdcc6972c79816df4f273554cca72a3107d1ceae
                 Go to Secure Checkout
               </button>
             </div>
