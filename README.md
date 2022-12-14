@@ -130,7 +130,7 @@ npm run dev
 ```
 
 ALTERNATIVELY
-👉 [CHECK OUT TECH BAR HERE](https://byzantium-hen-tux.cyclic.app)
+👉 [CHECK OUT TECH BAR HERE](sore-blue-turtle-hat.cyclic.app/)
 
 ## 🔉 Site Images & Product Description Courtesy
 
